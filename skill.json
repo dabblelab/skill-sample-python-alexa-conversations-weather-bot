@@ -13,7 +13,7 @@
             }
           },
           "endpoint": {
-            "sourceDir": "lambda/custom"
+            "sourceDir": "lambda"
           },
           "interfaces": [
             {
