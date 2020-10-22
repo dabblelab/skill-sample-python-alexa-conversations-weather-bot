@@ -25,8 +25,7 @@ class GetWeatherApiHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        cityNameWithId = utils.getCityNameWithIdFromApiRequestSlots(
-            handler_input)
+        cityNameWithId = utils.getCityNameWithIdFromApiRequestSlots(handler_input)
 
         if not cityNameWithId:
             # We couldn't match this city value to our slot, we'll return empty and let the response template handle it.
@@ -38,8 +37,8 @@ class GetWeatherApiHandler(AbstractRequestHandler):
         response = {
             'apiResponse': {
                 'cityName': cityNameWithId.name,
-                'lowTemperature': weather.lowTemperature,
-                'highTemperature': weather.highTemperature
+                'lowTemperature': weather['lowTemperature'],
+                'highTemperature': weather['highTemperature']
             }
         }
 
@@ -119,7 +118,7 @@ class LoggingRequestInterceptor(AbstractRequestInterceptor):
 
 
 class LoggingResponseInterceptor(AbstractResponseInterceptor):
-    def process(handler_input, response):
+    def process(self, handler_input, response):
         print("Response generated: {}".format(response))
 
 # The SkillBuilder object acts as the entry point for your skill, routing all request and response
