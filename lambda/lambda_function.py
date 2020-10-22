@@ -113,8 +113,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 
 class LoggingRequestInterceptor(AbstractRequestInterceptor):
     def process(self, handler_input):
-        print("Request received: {}".format(
-            handler_input.request_envelope.request))
+        print("Request received: {}".format(handler_input.request_envelope.request))
 
 
 class LoggingResponseInterceptor(AbstractResponseInterceptor):
@@ -137,7 +136,7 @@ sb.add_request_handler(IntentReflectorHandler())
 sb.add_exception_handler(CatchAllExceptionHandler())
 
 # register interceptors
-# sb.add_global_response_interceptor(LoggingRequestInterceptor())
-# sb.add_global_response_interceptor(LoggingResponseInterceptor())
+sb.add_global_request_interceptor(LoggingRequestInterceptor())
+sb.add_global_response_interceptor(LoggingResponseInterceptor())
 
 lambda_handler = sb.lambda_handler()
